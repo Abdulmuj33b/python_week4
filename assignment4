@@ -1,0 +1,34 @@
+def file_read_write():
+    try:
+        # Ask the user for the filename
+        input_filename = input("Enter the filename to read: ")
+
+        # Try opening and reading the file
+        with open(input_filename, 'r', encoding='utf-8') as infile:
+            content = infile.read()
+
+        # Modify the content let us say, convert to uppercase
+        modified_content = content.upper()
+
+        # Write the modified content to a new file
+        output_filename = "modified_" + input_filename
+        with open(output_filename, 'w', encoding='utf-8') as outfile:
+            outfile.write(modified_content)
+
+        print(f"Modified content written to: {output_filename}")
+
+    except FileNotFoundError:
+        print(f"Error: The file '{input_filename}' does not exist.")
+    except PermissionError:
+        print(f"Error: Permission denied for file '{input_filename}'. Please check file permissions.")
+    except IsADirectoryError:
+        print(f"Error: '{input_filename}' is a directory, not a file.")
+    except UnicodeDecodeError:
+        print(f"Error: Unable to decode the file '{input_filename}'. Ensure it is a readable text file.")
+    except IOError:
+        print(f"Error: An I/O error occurred while accessing '{input_filename}'.")
+    except Exception as e:
+        print(f"Unexpected error: {e}")
+
+# Run the function
+file_read_write()
